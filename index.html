@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Prevent scroll restoration & fetch getter errors on startup -->
+    <script>
+      (function() {
+        if ('scrollRestoration' in history) {
+          history.scrollRestoration = 'manual';
+        }
+        // Always reset URL to top/home on startup if lingering on a sub-section
+        if (window.location.hash && window.location.hash !== '#' && window.location.hash !== '#home') {
+          try {
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+          } catch (_) {}
+        }
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'instant'
+        });
+        try {
+          var target = window;
+          var nativeFetch = target.fetch;
+          var activeFetch = nativeFetch ? nativeFetch.bind(target) : null;
+          var propDesc = {
+            configurable: true,
+            enumerable: true,
+            get: function() {
+              return activeFetch;
+            },
+            set: function(fn) {
+              activeFetch = fn;
+            }
+          };
+          try {
+            Object.defineProperty(target, 'fetch', propDesc);
+          } catch (_) {}
+          if (typeof Window !== 'undefined' && Window.prototype) {
+            try {
+              Object.defineProperty(Window.prototype, 'fetch', propDesc);
+            } catch (_) {}
+          }
+        } catch (_) {}
+      })();
+    </script>
+    <title>Yojees R — AI & Cloud Computing Student</title>
+    <meta
+      name="description"
+      content="Personal portfolio of Yojees R — a first-year student exploring AI, cloud computing, and software development."
+    />
+    <meta property="og:title" content="Yojees R — AI & Cloud Computing Student" />
+    <meta
+      property="og:description"
+      content="First-year student exploring AI, cloud computing and software development — learning by building, experimenting and turning ideas into real-world projects."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://db.onlinewebfonts.com/c/8cb707a9b8a73f8a7403336b861c3074?family=BubbledotICG-FinePos"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Full-screen looping video background with subtle dark overlay -->
+    <div class="bg" id="bg-canvas">
+      <video class="bg-video" id="bg-video" autoplay muted loop playsinline>
+        <source
+          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260809_012548_ef22562c-c0ae-4816-ad9d-f8922af4e6a7.mp4"
+          type="video/mp4"
+        />
+      </video>
+      <div class="bg-scrim" aria-hidden="true"></div>
+    </div>
+
+    <div class="page" id="page-root">
+      <!-- 1) FIRST VIEWPORT LANDING -->
+      <section class="viewport-landing" id="home" aria-label="Portfolio Introduction">
+        <header class="header" id="header">
+          <!-- Text brand identity: NO logo image -->
+          <a class="brand-mark" id="brand-logo" href="#home" aria-label="Yojees R Home">
+            <span class="brand-text" id="header-name">YOJEES.R</span>
+          </a>
+
+          <!-- Centered navigation pill -->
+          <nav class="nav-pill" id="primary-nav" aria-label="Primary Navigation">
+            <a href="#home" class="active" id="nav-home">HOME</a>
+            <a href="#about" id="nav-about">ABOUT</a>
+            <a href="#journey" id="nav-journey">JOURNEY</a>
+            <a href="#projects" id="nav-projects">PROJECTS</a>
+            <a href="#certifications" id="nav-certifications">CERTIFICATIONS</a>
+            <a href="#contact" id="nav-contact">CONTACT</a>
+          </nav>
+
+          <!-- Resume pill button (Modal Trigger) -->
+          <button
+            class="resume-pill resume-muted"
+            id="resume-btn"
+            type="button"
+            aria-label="Resume coming soon"
+          >
+            RESUME — COMING SOON
+          </button>
+
+          <!-- Mobile Hamburger -->
+          <button
+            class="burger"
+            id="burger-btn"
+            type="button"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </header>
+
+        <!-- Centered Hero -->
+        <main class="hero" id="hero">
+          <!-- Overlapping symbols trust row -->
+          <div class="trust anim" id="trust-banner" style="--d: 0.05s">
+            <div class="trust-avatars" aria-hidden="true">
+              <span class="trust-avatar a1" title="Software Development">
+                <span class="trust-inner">
+                  <span class="trust-sym">&lt;/&gt;</span>
+                </span>
+              </span>
+              <span class="trust-avatar a2" title="Artificial Intelligence">
+                <span class="trust-inner">
+                  <span class="trust-sym">AI</span>
+                </span>
+              </span>
+              <span class="trust-avatar a3" title="Cloud Computing">
+                <span class="trust-inner">
+                  <span class="trust-sym">☁</span>
+                </span>
+              </span>
+            </div>
+            <div class="trust-pill" id="trust-text">BUILDING MY FUTURE IN TECH</div>
+          </div>
+
+          <!-- Main Hero Headline: Retro dot-matrix, solid white -->
+          <h1 class="headline anim" id="hero-headline">
+            <span class="line line-1">YOJEES R</span>
+            <span class="line line-2">BUILDING BEYOND LIMITS</span>
+          </h1>
+
+          <!-- Hero Subhead -->
+          <p class="subhead anim" id="hero-subhead" style="--d: 0.28s">
+            First-year student exploring AI, cloud computing and software development — learning by
+            building, experimenting and turning ideas into real-world projects.
+          </p>
+
+          <!-- Hero CTAs -->
+          <div class="cta-group anim" id="hero-cta-group" style="--d: 0.4s">
+            <a class="cta" id="cta-projects" href="#projects">EXPLORE MY WORK →</a>
+            <a class="cta-secondary" id="cta-journey" href="#journey">MY JOURNEY ↓</a>
+          </div>
+        </main>
+
+        <!-- Bottom 4-Column Stats -->
+        <footer class="stats" id="stats-footer" aria-label="Portfolio metrics">
+          <div class="stat anim" id="stat-projects" style="--d: 0.5s">
+            <div class="stat-icon">&lt;</div>
+            <div class="stat-value">
+              <span
+                data-count="1"
+                data-decimals="0"
+                data-prefix="0"
+                data-suffix="+"
+                data-i="0"
+                >01+</span
+              >
+            </div>
+            <div class="stat-label">PROJECTS</div>
+          </div>
+
+          <div class="stat anim" id="stat-certifications" style="--d: 0.58s">
+            <div class="stat-icon">%</div>
+            <div class="stat-value">
+              <span
+                data-count="2"
+                data-decimals="0"
+                data-prefix="0"
+                data-suffix=""
+                data-i="1"
+                >02</span
+              >
+            </div>
+            <div class="stat-label">CERTIFICATIONS</div>
+          </div>
+
+          <div class="stat anim" id="stat-journey" style="--d: 0.66s">
+            <div class="stat-icon">*</div>
+            <div class="stat-value">
+              <span
+                data-count="1"
+                data-decimals="0"
+                data-prefix="0"
+                data-suffix=""
+                data-i="2"
+                >01</span
+              >
+            </div>
+            <div class="stat-label">YEAR OF JOURNEY</div>
+          </div>
+
+          <div class="stat anim" id="stat-curiosity" style="--d: 0.74s">
+            <div class="stat-icon">#</div>
+            <div class="stat-value">
+              <span class="stat-infinity" aria-label="Endless Curiosity">∞</span>
+            </div>
+            <div class="stat-label">CURIOSITY</div>
+          </div>
+        </footer>
+      </section>
+
+      <!-- 2) ABOUT ME SECTION -->
+      <section class="content-section" id="about" aria-label="About Yojees R">
+        <div class="section-container">
+          <div class="section-header">
+            <div
+              class="terminal-heading"
+              data-typing="> ABOUT ME"
+              id="heading-about"
+            >
+              <span class="typed-text">&gt; ABOUT ME</span><span class="typing-cursor">_</span>
+            </div>
+          </div>
+
+          <div class="about-content anim-scroll">
+            <div class="about-paragraphs">
+              <p class="lead-text">
+                I'm Yojees R, a first-year student with a growing interest in AI, cloud computing
+                and software development.
+              </p>
+              <p class="body-text">
+                I'm at the beginning of my technology journey, but I believe meaningful progress
+                comes from consistently learning, experimenting and building.
+              </p>
+              <p class="body-text">
+                Instead of waiting until I know everything, I'm learning by creating projects,
+                exploring new technologies and documenting what I discover along the way.
+              </p>
+              <p class="body-text">
+                My current focus is developing strong fundamentals in programming, Linux, AI and
+                cloud technologies while improving my ability to turn ideas into useful digital
+                experiences.
+              </p>
+            </div>
+
+            <!-- WHAT DRIVES ME SUBSECTION -->
+            <div class="drives-subsection anim-scroll">
+              <span class="subsection-tag">// PHILOSOPHY</span>
+              <h3 class="subsection-title">WHAT DRIVES ME</h3>
+
+              <div class="mantra-grid" id="mantra-grid">
+                <span class="mantra-word" style="--w-i: 0">LEARN.</span>
+                <span class="mantra-word" style="--w-i: 1">BUILD.</span>
+                <span class="mantra-word" style="--w-i: 2">BREAK.</span>
+                <span class="mantra-word" style="--w-i: 3">UNDERSTAND.</span>
+                <span class="mantra-word" style="--w-i: 4">IMPROVE.</span>
+                <span class="mantra-word" style="--w-i: 5">REPEAT.</span>
+              </div>
+
+              <blockquote class="mantra-quote">
+                "I want to become someone who can understand a problem, learn the technology
+                required to solve it and build something useful."
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2.5) NOW SECTION -->
+      <section class="content-section" id="now" aria-label="What I'm Doing Now">
+        <div class="section-container">
+          <div class="section-header">
+            <div
+              class="terminal-heading"
+              data-typing="> WHAT I'M DOING NOW"
+              id="heading-now"
+            >
+              <span class="typed-text">&gt; WHAT I'M DOING NOW</span><span class="typing-cursor">_</span>
+            </div>
+            <p class="section-subtext">Active engineering focus, current projects, and daily learning rhythm.</p>
+          </div>
+
+          <div class="now-grid anim-scroll">
+            <div class="now-card">
+              <div class="now-meta-row">
+                <span class="now-tag">// LEARNING</span>
+                <span class="now-pulse-dot" aria-hidden="true"></span>
+              </div>
+              <h3 class="now-card-title">Cloud Computing</h3>
+              <p class="now-card-desc">Understanding core infrastructure, cloud architectures, Linux virtualization and modern deployment workflows.</p>
+            </div>
+
+            <div class="now-card now-card-active">
+              <div class="now-meta-row">
+                <span class="now-tag">// BUILDING</span>
+                <span class="now-pulse-dot" aria-hidden="true"></span>
+              </div>
+              <h3 class="now-card-title">StudentSpend</h3>
+              <p class="now-card-desc">Maintaining and improving the live student expense tracking web app with real student feedback and cleaner UI logic.</p>
+            </div>
+
+            <div class="now-card">
+              <div class="now-meta-row">
+                <span class="now-tag">// EXPLORING</span>
+                <span class="now-pulse-dot" aria-hidden="true"></span>
+              </div>
+              <h3 class="now-card-title">Artificial Intelligence</h3>
+              <p class="now-card-desc">Experimenting with Gemini models, agentic workflows, prompt chaining, and multimodal capabilities.</p>
+            </div>
+
+            <div class="now-card">
+              <div class="now-meta-row">
+                <span class="now-tag">// IMPROVING</span>
+                <span class="now-pulse-dot" aria-hidden="true"></span>
+              </div>
+              <h3 class="now-card-title">JS + Web Dev</h3>
+              <p class="now-card-desc">Deepening knowledge of modern JavaScript, asynchronous patterns, responsive layouts and performant DOM manipulation.</p>
+            </div>
+          </div>
+
+          <div class="now-status-bar anim-scroll">
+            <div class="status-indicator-col">
+              <span class="status-live-dot" aria-hidden="true"></span>
+              <span class="status-key">SYSTEM STATUS:</span>
+            </div>
+            <div class="status-val-col">
+              <span class="status-val-badge">STILL LEARNING</span>
+              <span class="status-statement">No shortcuts. Building deliberate competence every single day.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3) MY JOURNEY SECTION (TIMELINE) -->
+      <section class="content-section" id="journey" aria-label="My Journey">
+        <div class="section-container">
+          <div class="section-header">
+            <div
+              class="terminal-heading"
+              data-typing="> MY JOURNEY"
+              id="heading-journey"
+            >
+              <span class="typed-text">&gt; MY JOURNEY</span><span class="typing-cursor">_</span>
+            </div>
+            <p class="section-subtext">The story so far — steps, milestones, and what lies ahead.</p>
+          </div>
+
+          <div class="timeline-wrapper anim-scroll">
+            <!-- 01 -->
+            <div class="timeline-step">
+              <div class="timeline-marker">
+                <span class="step-num">01</span>
+                <span class="step-line" aria-hidden="true"></span>
+              </div>
+              <div class="timeline-body">
+                <h3 class="timeline-title">STARTING OUT</h3>
+                <p class="timeline-desc">
+                  Beginning my journey in technology as a first-year student. Developing core discipline,
+                  curiosity, and a commitment to continuous growth.
+                </p>
+              </div>
+            </div>
+
+            <!-- 02 -->
+            <div class="timeline-step">
+              <div class="timeline-marker">
+                <span class="step-num">02</span>
+                <span class="step-line" aria-hidden="true"></span>
+              </div>
+              <div class="timeline-body">
+                <h3 class="timeline-title">EXPLORING LINUX</h3>
+                <p class="timeline-desc">
+                  Completed foundational systems training:
+                  <strong>Linux For Absolute Beginners</strong>.
+                </p>
+                <div class="timeline-link-row">
+                  <a
+                    class="timeline-link"
+                    href="https://www.eduonix.com/certificate/6f241bc025"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Eduonix Certificate <span class="arrow" aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 03 -->
+            <div class="timeline-step">
+              <div class="timeline-marker">
+                <span class="step-num">03</span>
+                <span class="step-line" aria-hidden="true"></span>
+              </div>
+              <div class="timeline-body">
+                <h3 class="timeline-title">EXPLORING AI</h3>
+                <p class="timeline-desc">
+                  Earned official certification:
+                  <strong>Gemini Certified University Student</strong>.
+                </p>
+                <div class="timeline-link-row">
+                  <a
+                    class="timeline-link"
+                    href="https://edu.google.accredible.com/5b92912f-d1a7-4b8f-91f1-a308d81e3486#acc.BUEdGi7C"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Google for Education Credential <span class="arrow" aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 04 -->
+            <div class="timeline-step">
+              <div class="timeline-marker">
+                <span class="step-num">04</span>
+                <span class="step-line" aria-hidden="true"></span>
+              </div>
+              <div class="timeline-body">
+                <h3 class="timeline-title">BUILDING</h3>
+                <p class="timeline-desc">
+                  Created <strong>StudentSpend</strong>: A student-focused expense tracking web
+                  application to help university students take control of daily finances.
+                </p>
+              </div>
+            </div>
+
+            <!-- 05 -->
+            <div class="timeline-step">
+              <div class="timeline-marker">
+                <span class="step-num">05</span>
+              </div>
+              <div class="timeline-body">
+                <h3 class="timeline-title">NEXT</h3>
+                <p class="timeline-desc">
+                  Continue exploring and advancing in:
+                </p>
+                <div class="next-tags">
+                  <span class="next-pill">AI</span>
+                  <span class="next-pill">Cloud Computing</span>
+                  <span class="next-pill">Software Development</span>
+                  <span class="next-pill">Automation</span>
+                  <span class="next-pill">Real-World Projects</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3.5) BUILD LOG SECTION -->
+      <section class="content-section" id="build-log" aria-label="Build Log">
+        <div class="section-container">
+          <div class="section-header">
+            <div
+              class="terminal-heading"
+              data-typing="> BUILD LOG"
+              id="heading-build-log"
+            >
+              <span class="typed-text">&gt; BUILD LOG</span><span class="typing-cursor">_</span>
+            </div>
+            <p class="section-subtext">Chronological stream of completed milestones, deployed experiments, and upcoming goals.</p>
+          </div>
+
+          <div class="build-log-container anim-scroll">
+            <div class="build-stream">
+              <!-- Entry 1 -->
+              <div class="build-item">
+                <div class="build-meta">
+                  <span class="build-timestamp">09/2026</span>
+                  <span class="build-pill build-shipped">SHIPPED</span>
+                </div>
+                <div class="build-body">
+                  <h3 class="build-title">StudentSpend Web Application</h3>
+                  <p class="build-text">
+                    Engineered and launched student budget and daily expense tracking web app on Vercel to help students take control of personal cashflow.
+                  </p>
+                  <a class="build-link" href="https://studentspendyojees.vercel.app/" target="_blank" rel="noopener noreferrer">
+                    studentspendyojees.vercel.app <span class="arrow" aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Entry 2 -->
+              <div class="build-item">
+                <div class="build-meta">
+                  <span class="build-timestamp">09/2026</span>
+                  <span class="build-pill">CREDENTIAL</span>
+                </div>
+                <div class="build-body">
+                  <h3 class="build-title">Gemini Certified University Student</h3>
+                  <p class="build-text">
+                    Completed Google for Education credential validating applied proficiency in generative AI and modern prompt engineering workflows.
+                  </p>
+                  <a class="build-link" href="https://edu.google.accredible.com/5b92912f-d1a7-4b8f-91f1-a308d81e3486#acc.BUEdGi7C" target="_blank" rel="noopener noreferrer">
+                    Verify Credential <span class="arrow" aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Entry 3 -->
+              <div class="build-item">
+                <div class="build-meta">
+                  <span class="build-timestamp">09/2026</span>
+                  <span class="build-pill">TRAINING</span>
+                </div>
+                <div class="build-body">
+                  <h3 class="build-title">Linux For Absolute Beginners</h3>
+                  <p class="build-text">
+                    Completed foundational curriculum covering command-line fundamentals, file systems, permissions, shell navigation and process control.
+                  </p>
+                  <a class="build-link" href="https://www.eduonix.com/certificate/6f241bc025" target="_blank" rel="noopener noreferrer">
+                    Eduonix Certificate <span class="arrow" aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Entry 4 -->
+              <div class="build-item">
+                <div class="build-meta">
+                  <span class="build-timestamp">09/2026</span>
+                  <span class="build-pill">SYSTEMS</span>
+                </div>
+                <div class="build-body">
+                  <h3 class="build-title">Developer Portfolio Architecture v1.0</h3>
+                  <p class="build-text">
+                    Constructed single-viewport retro-futuristic portfolio featuring native background video, monochrome styling, and terminal typing animations.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- NEXT BUILD GOALS -->
+            <div class="next-build-box">
+              <div class="next-build-header">
+                <span class="next-build-tag">// NEXT BUILD GOALS</span>
+                <span class="next-build-counter">04 PLANNED</span>
+              </div>
+              <div class="next-goals-grid">
+                <div class="goal-item">
+                  <span class="goal-bracket">[ ]</span>
+                  <span class="goal-label">Cloud-native infrastructure and containerized serverless deployments</span>
+                </div>
+                <div class="goal-item">
+                  <span class="goal-bracket">[ ]</span>
+                  <span class="goal-label">Applied AI integrations: custom assistant workflows and prompt pipelines</span>
+                </div>
+                <div class="goal-item">
+                  <span class="goal-bracket">[ ]</span>
+                  <span class="goal-label">Full-stack web application with database persistence and REST APIs</span>
+                </div>
+                <div class="goal-item">
+                  <span class="goal-bracket">[ ]</span>
+                  <span class="goal-label">Open-source contributions to student and developer utility tools</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4) THINGS I'VE BUILT (PROJECTS) -->
+      <section class="content-section" id="projects" aria-label="Things I've Built">
+        <div class="section-container">
+          <div class="section-header">
+            <div
+              class="terminal-heading"
+              data-typing="> THINGS I'VE BUILT"
+              id="heading-projects"
+            >
+              <span class="typed-text">&gt; THINGS I'VE BUILT</span><span class="typing-cursor">_</span>
+            </div>
+          </div>
+
+          <div class="projects-container anim-scroll">
+            <!-- Featured Project: StudentSpend -->
+            <div class="project-card">
+              <div class="project-badge-row">
+                <span class="project-tag">FEATURED PROJECT</span>
+                <span class="project-tech-stack">HTML / CSS / JAVASCRIPT / VERCEL</span>
+              </div>
+
+              <h3 class="project-name">STUDENTSPEND</h3>
+              <p class="project-description">
+                A student-focused expense tracking web application designed to help students
+                understand and manage their spending.
+              </p>
+
+              <div class="project-actions">
+                <a
+                  class="project-cta-btn"
+                  href="https://studentspendyojees.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  VIEW LIVE PROJECT <span class="arrow" aria-hidden="true">→</span>
+                </a>
+                <span class="project-url">studentspendyojees.vercel.app</span>
+              </div>
+            </div>
+
+            <!-- Loading State for Upcoming Projects -->
+            <div class="more-projects-box">
+              <div class="more-projects-header">
+                <span class="loader-pulse-dot" aria-hidden="true"></span>
+                <span class="more-projects-title">MORE PROJECTS LOADING...</span>
+              </div>
+              <div class="loading-bar-row">
+                <div class="ascii-bar" aria-label="Loading progress 67%">[████████░░░░]</div>
+                <span class="bar-tag">67% IN PROGRESS</span>
+              </div>
+              <p class="more-projects-desc">
+                Currently iterating on next-phase student tools, AI agent experiments, and cloud-hosted microservices.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5) PROOF OF LEARNING (CERTIFICATIONS) -->
+      <section class="content-section" id="certifications" aria-label="Proof of Learning">
+        <div class="section-container">
+          <div class="section-header">
+            <div
+              class="terminal-heading"
+              data-typing="> PROOF OF LEARNING"
+              id="heading-certifications"
+            >
+              <span class="typed-text">&gt; PROOF OF LEARNING</span><span class="typing-cursor">_</span>
+            </div>
+          </div>
+
+          <div class="certs-container anim-scroll">
+            <!-- Certification 01 -->
+            <div class="cert-item">
+              <div class="cert-order">CERTIFICATION 01</div>
+              <div class="cert-main">
+                <h3 class="cert-heading">Gemini Certified University Student</h3>
+                <div class="cert-issuer">Google for Education</div>
+              </div>
+              <div class="cert-cta-col">
+                <a
+                  class="cert-verify-btn"
+                  href="https://edu.google.accredible.com/5b92912f-d1a7-4b8f-91f1-a308d81e3486#acc.BUEdGi7C"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  VERIFY CREDENTIAL <span class="arrow" aria-hidden="true">→</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Certification 02 -->
+            <div class="cert-item">
+              <div class="cert-order">CERTIFICATION 02</div>
+              <div class="cert-main">
+                <h3 class="cert-heading">Linux For Absolute Beginners</h3>
+                <div class="cert-issuer">Eduonix</div>
+              </div>
+              <div class="cert-cta-col">
+                <a
+                  class="cert-verify-btn"
+                  href="https://www.eduonix.com/certificate/6f241bc025"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  VERIFY CREDENTIAL <span class="arrow" aria-hidden="true">→</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6) CURRENTLY LEARNING (SKILLS) -->
+      <section class="content-section" id="learning" aria-label="Currently Learning">
+        <div class="section-container">
+          <div class="section-header">
+            <div
+              class="terminal-heading"
+              data-typing="> CURRENTLY LEARNING"
+              id="heading-learning"
+            >
+              <span class="typed-text">&gt; CURRENTLY LEARNING</span><span class="typing-cursor">_</span>
+            </div>
+            <p class="section-subtext">
+              Active technical focus areas — foundational study and hands-on building.
+            </p>
+          </div>
+
+          <div class="learning-list anim-scroll">
+            <div class="learning-row">
+              <span class="row-num">01</span>
+              <span class="row-title">AI FUNDAMENTALS</span>
+              <span class="row-status">EXPLORING</span>
+              <span class="row-indicator"></span>
+            </div>
+
+            <div class="learning-row">
+              <span class="row-num">02</span>
+              <span class="row-title">CLOUD COMPUTING</span>
+              <span class="row-status">LEARNING</span>
+              <span class="row-indicator"></span>
+            </div>
+
+            <div class="learning-row">
+              <span class="row-num">03</span>
+              <span class="row-title">LINUX</span>
+              <span class="row-status">PRACTICING</span>
+              <span class="row-indicator"></span>
+            </div>
+
+            <div class="learning-row">
+              <span class="row-num">04</span>
+              <span class="row-title">JAVASCRIPT</span>
+              <span class="row-status">BUILDING</span>
+              <span class="row-indicator"></span>
+            </div>
+
+            <div class="learning-row">
+              <span class="row-num">05</span>
+              <span class="row-title">WEB DEVELOPMENT</span>
+              <span class="row-status">BUILDING</span>
+              <span class="row-indicator"></span>
+            </div>
+
+            <div class="learning-row">
+              <span class="row-num">06</span>
+              <span class="row-title">GIT / GITHUB</span>
+              <span class="row-status">USING</span>
+              <span class="row-indicator"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6.5) WHAT I BELIEVE SECTION -->
+      <section class="content-section" id="beliefs" aria-label="What I Believe">
+        <div class="section-container">
+          <div class="section-header">
+            <div
+              class="terminal-heading"
+              data-typing="> WHAT I BELIEVE"
+              id="heading-beliefs"
+            >
+              <span class="typed-text">&gt; WHAT I BELIEVE</span><span class="typing-cursor">_</span>
+            </div>
+            <p class="section-subtext">Core tenets shaping how I study, code, and approach technology.</p>
+          </div>
+
+          <div class="beliefs-grid anim-scroll">
+            <div class="belief-card">
+              <div class="belief-num">01</div>
+              <h3 class="belief-title">DON'T WAIT TO BE READY</h3>
+              <p class="belief-desc">
+                Competence isn't gained by waiting until you feel completely prepared. You become capable by diving in, confronting the unknown, and solving one obstacle at a time.
+              </p>
+            </div>
+
+            <div class="belief-card">
+              <div class="belief-num">02</div>
+              <h3 class="belief-title">BUILD WHILE LEARNING</h3>
+              <p class="belief-desc">
+                Passive consumption gives the illusion of mastery. Real understanding starts when theories and concepts are tested against actual code and live execution.
+              </p>
+            </div>
+
+            <div class="belief-card">
+              <div class="belief-num">03</div>
+              <h3 class="belief-title">LEARN BY DOING</h3>
+              <p class="belief-desc">
+                Debugging failed builds, resolving error logs, and breaking systems teach deeper, longer-lasting engineering intuition than memorizing textbook answers.
+              </p>
+            </div>
+
+            <div class="belief-card">
+              <div class="belief-num">04</div>
+              <h3 class="belief-title">STAY CURIOUS</h3>
+              <p class="belief-desc">
+                Never accept black boxes without asking how they tick: exploring how the operating system handles threads, how networks route packets, and how neural models infer.
+              </p>
+            </div>
+
+            <div class="belief-card">
+              <div class="belief-num">05</div>
+              <h3 class="belief-title">BUILD WITH PURPOSE</h3>
+              <p class="belief-desc">
+                Software is at its best when solving genuine, practical friction. Even small student projects should deliver real utility to someone in the world.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7) THE LONG GAME (INSPIRATIONAL SECTION) -->
+      <section class="content-section cinematic-section" id="long-game" aria-label="The Long Game">
+        <div class="section-container text-center">
+          <div class="section-header">
+            <div
+              class="terminal-heading centered-heading"
+              data-typing="> THE LONG GAME"
+              id="heading-long-game"
+            >
+              <span class="typed-text">&gt; THE LONG GAME</span><span class="typing-cursor">_</span>
+            </div>
+          </div>
+
+          <div class="statement-wrapper anim-scroll">
+            <h2 class="cinematic-statement">
+              "I'M NOT TRYING TO KNOW EVERYTHING.<br />
+              I'M TRYING TO GET BETTER EVERY DAY."
+            </h2>
+
+            <div class="statement-sub">
+              <p>Every project is practice.</p>
+              <p>Every mistake is feedback.</p>
+              <p>Every new technology is another opportunity to learn.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subtle Infinite Animated Scrolling Marquee -->
+        <div class="ticker-wrapper" aria-hidden="true">
+          <div class="ticker-track">
+            <span class="ticker-item">LEARN → BUILD → FAIL → DEBUG → IMPROVE → REPEAT</span>
+            <span class="ticker-item">LEARN → BUILD → FAIL → DEBUG → IMPROVE → REPEAT</span>
+            <span class="ticker-item">LEARN → BUILD → FAIL → DEBUG → IMPROVE → REPEAT</span>
+            <span class="ticker-item">LEARN → BUILD → FAIL → DEBUG → IMPROVE → REPEAT</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8) WHERE I'M HEADED (VISION) -->
+      <section class="content-section" id="vision" aria-label="Where I'm Headed">
+        <div class="section-container">
+          <div class="section-header">
+            <div
+              class="terminal-heading"
+              data-typing="> WHERE I'M HEADED"
+              id="heading-vision"
+            >
+              <span class="typed-text">&gt; WHERE I'M HEADED</span><span class="typing-cursor">_</span>
+            </div>
+          </div>
+
+          <div class="vision-body anim-scroll">
+            <h2 class="vision-statement">BUILDING TOWARD AI + CLOUD</h2>
+            <p class="vision-description">
+              My long-term goal is to build strong foundations in software, artificial intelligence
+              and cloud computing, then use those skills to create systems that are useful, scalable
+              and genuinely impactful.
+            </p>
+
+            <div class="vision-trio" id="vision-trio">
+              <div class="trio-word" data-word="AI">AI</div>
+              <div class="trio-word" data-word="CLOUD">CLOUD</div>
+              <div class="trio-word" data-word="BUILD">BUILD</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9) INTERACTIVE TERMINAL SECTION -->
+      <section class="content-section" id="terminal-section" aria-label="Interactive Terminal">
+        <div class="section-container">
+          <div class="section-header">
+            <div
+              class="terminal-heading"
+              data-typing="> YOJEES@PORTFOLIO:~$"
+              id="heading-terminal"
+            >
+              <span class="typed-text">&gt; YOJEES@PORTFOLIO:~$</span><span class="typing-cursor">_</span>
+            </div>
+            <p class="section-subtext">Click quick command chips or type in the interactive prompt below.</p>
+          </div>
+
+          <div class="terminal-shell anim-scroll" id="interactive-terminal">
+            <div class="shell-header">
+              <div class="shell-dots">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <div class="shell-title">yojees@portfolio:~$ — bash 5.2</div>
+            </div>
+
+            <!-- Clickable Command Shortcuts -->
+            <div class="terminal-chips-bar" aria-label="Quick Terminal Commands">
+              <span class="chips-label">EXECUTE:</span>
+              <button class="term-chip" type="button" data-cmd="whoami">whoami</button>
+              <button class="term-chip" type="button" data-cmd="currently">currently</button>
+              <button class="term-chip" type="button" data-cmd="focus">focus</button>
+              <button class="term-chip" type="button" data-cmd="status">status</button>
+              <button class="term-chip chip-nav" type="button" data-cmd="about">about</button>
+              <button class="term-chip chip-nav" type="button" data-cmd="projects">projects</button>
+              <button class="term-chip chip-nav" type="button" data-cmd="skills">skills</button>
+              <button class="term-chip chip-nav" type="button" data-cmd="contact">contact</button>
+              <button class="term-chip chip-util" type="button" data-cmd="clear">clear</button>
+            </div>
+
+            <div class="shell-window" id="terminal-window">
+              <div class="terminal-output" id="terminal-output">
+                <div class="term-line revealed">&gt; Initializing developer environment... [OK]</div>
+                <div class="term-line revealed">&gt; Host: yojees-cloud-station (Linux x86_64)</div>
+                <div class="term-line revealed">&gt; Type a command or click any shortcut chip above.</div>
+                <div class="term-line revealed status-line">&gt; CURRENT STATUS: STILL LEARNING. STILL BUILDING._</div>
+              </div>
+
+              <!-- Interactive Command Line Form -->
+              <form class="terminal-cli-form" id="terminal-cli-form" autocomplete="off">
+                <label class="terminal-cli-prompt" for="terminal-cli-input">yojees@portfolio:~$</label>
+                <input
+                  type="text"
+                  id="terminal-cli-input"
+                  class="terminal-cli-input"
+                  placeholder="type whoami, currently, focus, status, or help..."
+                  spellcheck="false"
+                  autocomplete="off"
+                />
+                <button type="submit" class="terminal-run-btn" id="terminal-run-btn">RUN</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10) CONTACT SECTION -->
+      <section class="content-section" id="contact" aria-label="Let's Connect">
+        <div class="section-container">
+          <div class="section-header">
+            <div
+              class="terminal-heading"
+              data-typing="> LET'S CONNECT"
+              id="heading-contact"
+            >
+              <span class="typed-text">&gt; LET'S CONNECT</span><span class="typing-cursor">_</span>
+            </div>
+          </div>
+
+          <div class="contact-box anim-scroll">
+            <p class="contact-lead">
+              Have an idea, project, opportunity or simply want to connect?<br />
+              I'm always open to learning from people, discussing technology and building something
+              interesting.
+            </p>
+
+            <div class="contact-actions">
+              <a
+                class="contact-btn contact-primary"
+                href="mailto:yojeesofficial@gmail.com"
+                id="contact-email-btn"
+              >
+                <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+                <span>EMAIL ME</span>
+              </a>
+
+              <a
+                class="contact-btn contact-secondary"
+                href="https://www.linkedin.com/in/yojees/"
+                target="_blank"
+                rel="noopener noreferrer"
+                id="contact-linkedin-btn"
+              >
+                <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+                <span>LINKEDIN</span>
+              </a>
+            </div>
+
+            <div class="contact-coordinates">
+              <div class="coord-item">
+                <span class="coord-label">Direct:</span>
+                <a class="coord-val" href="mailto:yojeesofficial@gmail.com">yojeesofficial@gmail.com</a>
+              </div>
+              <div class="coord-item">
+                <span class="coord-label">Network:</span>
+                <a
+                  class="coord-val"
+                  href="https://www.linkedin.com/in/yojees/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >linkedin.com/in/yojees</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 11) FINAL CLOSING SECTION -->
+      <section class="final-section" id="closing" aria-label="Final Statement">
+        <div class="final-container anim-scroll">
+          <h2 class="final-statement">SEE YOU IN THE NEXT BUILD.</h2>
+          <div class="final-student-title">YOJEES R — AI + CLOUD COMPUTING STUDENT</div>
+          <p class="final-bio-line">First-year student learning in public, building with purpose.</p>
+          <div class="final-divider" aria-hidden="true"></div>
+          <div class="final-copy">© 2026 YOJEES R</div>
+          <div class="final-sub">Built with curiosity, code & continuous learning.</div>
+
+          <!-- Back to Top Button -->
+          <div class="final-back-top-wrapper">
+            <button class="back-to-top-btn" id="back-to-top-btn" type="button" aria-label="Scroll back to top of page">
+              ↑ BACK TO TOP
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Mobile Navigation Overlay & Sheet -->
+    <div class="overlay" id="mobile-overlay" hidden></div>
+    <nav class="mobile-menu" id="mobile-menu" hidden aria-label="Mobile Navigation">
+      <a href="#home" class="active" id="mobile-nav-home">HOME</a>
+      <a href="#about" id="mobile-nav-about">ABOUT</a>
+      <a href="#journey" id="mobile-nav-journey">JOURNEY</a>
+      <a href="#projects" id="mobile-nav-projects">PROJECTS</a>
+      <a href="#certifications" id="mobile-nav-certifications">CERTIFICATIONS</a>
+      <a href="#contact" id="mobile-nav-contact">CONTACT</a>
+      <button
+        class="mobile-resume mobile-resume-muted"
+        id="mobile-nav-resume"
+        type="button"
+        aria-label="Resume coming soon"
+      >
+        RESUME — COMING SOON
+      </button>
+    </nav>
+
+    <!-- Resume Notice Modal -->
+    <div
+      class="site-modal-overlay"
+      id="resume-modal"
+      hidden
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="resume-modal-title"
+    >
+      <div class="site-modal-card">
+        <div class="modal-corner-tag">// RESUME NOTICE</div>
+        <div class="modal-title-stack">
+          <h3 class="modal-title" id="resume-modal-title">RESUME</h3>
+          <span class="modal-sub-badge">COMING SOON</span>
+        </div>
+        <p class="modal-body-text">
+          "My resume is currently being prepared.<br />
+          For now, explore my projects, certifications and journey."
+        </p>
+        <div class="modal-actions">
+          <button class="modal-btn" id="resume-modal-close" type="button">CLOSE</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Easter Egg Modal (5 Clicks on YOJEES.R Header) -->
+    <div
+      class="site-modal-overlay"
+      id="easter-egg-modal"
+      hidden
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="easter-egg-title"
+    >
+      <div class="site-modal-card easter-egg-card">
+        <div class="modal-corner-tag">// EASTER EGG UNLOCKED</div>
+        <h3 class="modal-title" id="easter-egg-title">&gt; SECRET BUILD FOUND_</h3>
+        <p class="modal-body-text easter-egg-quote">
+          "Keep learning. Keep building. Keep going."
+        </p>
+        <div class="modal-actions">
+          <button class="modal-btn" id="easter-egg-close" type="button">[ CLOSE ]</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
