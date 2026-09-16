@@ -1141,6 +1141,21 @@ body.menu-open .burger span:nth-child(3) {
   border-radius: 9999px;
 }
 
+.project-tag-new {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.project-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #000000;
+  display: inline-block;
+  animation: pulseDot 1.6s infinite ease-in-out;
+}
+
 .project-tech-stack {
   font-family: var(--font-mono);
   font-size: 11px;
